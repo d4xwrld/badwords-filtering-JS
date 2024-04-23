@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Textarea Word Filter</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <form onsubmit="return submitForm(this)">
+      <textarea id="myTextarea"></textarea>
+      <button id="submit">Submit</button>
+    </form>
+
+    <script>
+      function submitForm() {
+        Swal.fire({
+          title: "Terkirim",
+          text: "saran anda sudah terekam",
+          icon: "success",
+          confirmButtonText: "Got it!",
+        });
+      }
+      const textarea = document.getElementById("myTextarea");
+      const submitButton = document.getElementById("submit");
+      const badWords = [
+        "anjing",
+        "pepek",
+        "bangsat",
+        "ajg",
+        "anjg",
+        "anj",
+        "bgst",
+        "gblg",
+        "goblok",
+        "goblog",
+        "tolol",
+        "idiot",
+        "memek",
+        "mmk",
+        "bodoh",
+        "belegug",
+        "kanjut",
+        "kanyut",
+        "kontol",
+        "ktl",
+        "kntl",
+        "gblk",
+        "bodo",
+      ];
+
+      textarea.addEventListener("input", () => {
+        const containsBadWord = badWords.some((word) =>
+          textarea.value.toLowerCase().includes(word.toLowerCase())
+        );
+
+        if (containsBadWord) {
+          Swal.fire({
+            title: "Word Detected!",
+            text: "tolong gunakan kata sopan!",
+            icon: "warning",
+            confirmButtonText: "Got it!",
+          });
+          submitButton.disabled = true;
+        } else {
+          submitButton.disabled = false;
+        }
+      });
+
+      submitButton.addEventListener("click", () => {
+        if (textarea.value.includes("important")) {
+          Swal.fire({
+            title: "Word Detected!",
+            text: "tolong gunakan kata sopan!",
+            icon: "warning",
+            confirmButtonText: "Got it!",
+          });
+        } else {
+          // submit the textarea value
+          console.log(textarea.value);
+        }
+      });
+    </script>
+  </body>
+</html>
